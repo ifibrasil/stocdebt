@@ -1,0 +1,461 @@
+---
+title: 'User guide'
+date: '2025-09-12'
+output:
+  html_document:
+    toc: true
+    toc_float:
+      collapsed: true
+    toc_depth: 2
+    number_sections: false
+    latex_engine: pdflatex
+vignette: >
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{User guide}
+  %\VignetteEncoding{UTF-8}
+---
+
+# Introduction
+
+Package `stocdebt` is useful to
+
+* simulate stochastic scenarios for public debt and its determinants (GDP growth, inflation, primary balance and interest rates).
+* estimate the probability of events related to public debt.
+
+Suggestions and bug reports can be submitted to ifi&#64;senado&#46;leg&#46;br or to the [Brazilian IFI repository on GitHub](https://github.com/ifibrasil/stocdebt).
+
+# 1) Setup
+
+To install the package from the online repository, run
+```{r install, eval=FALSE}
+# Install auxiliary package "remotes"
+install.packages("remotes")       
+
+# Install package "stocdebt"
+remotes::install_github("ifibrasil/stocdebt/stocdebt@<VERSION>", build_vignettes = TRUE, upgrade = "never")
+```
+
+The `<VERSION>` placeholder must be replaced with one of the **stable** version numbers of the package. For example, `"ifibrasil/stocdebt/stocdebt@0.2.0"`. These numbers are on the "Release" list of the online repository (right panel of the website). In case `@<VERSION>` is omitted from the command, a **development** version (subject to errors) of the package will possibly be installed.
+
+By the time this text is written, the latest stable version is `0.2.0`, but this number will change over time.
+
+If you have already installed the package and want to verify the version, run
+
+```{r, eval=FALSE}
+utils::packageDescription("stocdebt")$RemoteRef
+```
+
+If the output is `"<VERSION>"` (currently, `"0.2.0"`), your installation is correct. It is the latest stable version. If the output is `"HEAD"`, you installed the development version.
+
+Argument `build_vignettes = TRUE` is optional. If you do not use it, the package will be installed, but without an additional "User guide". Only standard documentation (help files) will be available.
+
+Argument `upgrade = "never"` also is optional, but simplifies the installation process.
+
+Next, load the package.
+```{r load, eval=TRUE}
+library(stocdebt)
+```
+
+To access the **index** of functions, open the initial help page of the package (command below) and click on *Index* at the bottom of the page.
+```{r help, eval=FALSE}
+# Initial help page of the package
+?stocdebt
+```
+
+To access detailed explanations about **each function** directly, you can run, for example
+```{r help 2, eval=FALSE}
+# Help file of function "sim()" [simulation of stochastic scenarios]
+?sim
+```
+
+# 2) Load economic data into R
+
+The package comes with sample data (object `sample_series`), shown in Example 1 below. Alternatively, you can use your own data, stored in an external xlsx file (Example 2).
+
+
+## Example 1 - Sample data {#id2}
+
+Object `sample_series` is a `list` containing, in turn, four `xts` objects:
+
+```{r sample_series, eval=FALSE}
+# Realized data, in yearly frequency, for debt and its determinants
+sample_series$realized_yearly_data
+
+# Realized data, in quarterly frequency, for debt and its determinants
+sample_series$realized_quarterly_data
+
+# Deterministic baseline projections, in yearly frequency, for debt and its determinants
+sample_series$baseline_yearly_scenario
+
+# Realized stock-flow adjustments for debt
+sample_series$realized_yearly_sfa_data
+```
+
+For example, realized yearly data are as follows.
+
+```{r realized_data, eval=TRUE}
+# Realized data, in yearly frequency, for debt and its determinants
+sample_series$realized_yearly_data
+```
+
+The objects in `sample_series` have been created from data from three sources:
+
+* hypothetical data;
+* public data from the Central Bank of Brazil (Banco Central do Brasil - BCB);
+* public data from the Brazilian Institute of Geography and Statistics (Instituto Brasileiro de Geografia e Estatística - IBGE).
+
+## Example 2 - Importing external data
+
+You can also import your own data from an external xlsx file. Suppose that your file is named `my_data.xlsx` and contains:
+
+* realized yearly data ranging from 2013 to 2023, on a worksheet named `realized_data`;
+* a baseline scenario ranging from 2024 to 2033, on a worksheet named `baseline_scenario`.
+
+Within `my_data.xlsx`, your data should be organized as in Tables 1 and 2. The first column need not be with time periods, because the start and end periods will be informed as arguments in function `import_custom_data()`.
+
+:::{.border style="padding: 10px 10px 0px 10px; margin: 10px 0px 10px 0px; border: 1px solid #dee2e6 !important; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);"}
+**Table 1. Example of realized data (2013-2023) in an xlsx file**
+
+| Year | primary balance | nominal gdp growth | real gdp growth | gdp deflator | consumer price index | nominal interest rate | real interest rate (w.r.t. gdp deflator) | debt | real interest rate (w.r.t. consumer price index)
+|:---------|---------:|---------:|---------:|---------:|---------:|---------:|---------:|---------:|---------:|
+|2013	   |1.7	      |10.7	 |3.0	    |7.5       |5.9	  |10.6	     |2.9	|51.5	   |4.4       |
+|2014	   |-0.6      |8.4	 |0.5	    |7.8       |6.4	  |11.1	     |3.0	|56.3	   |4.4       |
+|2015	   |-1.9      |3.8	 |-3.5	    |7.6       |10.7	  |13.2	     |5.2	|65.5	   |2.3       |
+|2016	   |-2.5      |4.6	 |-3.3	    |8.1       |6.3	  |13.1	     |4.6	|69.8	   |6.4       |
+|2017	   |-1.7      |5.0	 |1.3	    |3.7       |2.9	  |9.9	     |6.0	|73.7	   |6.8       |
+|2018	   |-1.5      |6.4	 |1.8	    |4.5       |3.7	  |8.3	     |3.6	|75.3	   |4.4       |
+|2019	   |-0.8      |5.5	 |1.2	    |4.2       |4.3	  |7.8	     |3.4	|74.4	   |3.3       |
+|2020	   |-9.2      |3.0	 |-3.3	    |6.5       |4.5	  |5.9	     |-0.6	|86.9	   |1.3       |
+|2021	   |0.7	      |16.9	 |5.0	    |11.4      |10.1	  |7.6	     |-3.4	|78.3	   |-2.2      |
+|2022	   |1.3	      |11.4	 |2.9	    |8.3       |5.8	  |10.8	     |2.4	|72.9	   |4.8       |
+|2023	   |-1.2      |7.8	 |3.0	    |4.7       |4.6	  |11.1	     |6.1	|75.2	   |6.2       |
+
+*Note 1: "w.r.t." means "with respect to".*
+
+*Note 2: the values are illustrative. They may be different from those used elsewhere in this guide.*
+:::
+
+
+:::{.border style="padding: 10px 10px 0px 10px; margin: 10px 0px 10px 0px; border: 1px solid #dee2e6 !important; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);"}
+**Table 2. Example of a baseline scenario (2024-2033) in an xlsx file**
+
+| Year | primary balance | nominal gdp growth | real gdp growth | gdp deflator | consumer price index | nominal interest rate | real interest rate (w.r.t. gdp deflator) | debt | real interest rate (w.r.t. consumer price index)
+|:---------|---------:|---------:|---------:|---------:|---------:|---------:|---------:|---------:|---------:|
+|2024      |-1.2	|6.1	|1.2	|4.8	|4.0	|9.5	|4.5	|78.2	|5.3
+|2025      |-1.2	|6.4	|2.1	|4.3	|3.4	|8.4	|4.0	|80.2	|4.9
+|2026      |-1.0	|5.9	|2.0	|3.8	|3.0	|7.3	|4.2	|82.2	|4.2
+|2027      |-1.7	|5.7	|2.0	|3.6	|3.0	|7.0	|3.9	|84.9	|3.9
+|2028      |-0.5	|5.7	|2.0	|3.6	|3.0	|7.0	|3.9	|86.5	|3.9
+|2029      |-0.4	|5.7	|2.0	|3.6	|3.0	|7.0	|3.9	|87.9	|3.9
+|2030      |-0.2	|5.7	|2.0	|3.6	|3.0	|7.0	|3.9	|89.3	|3.9
+|2031      |-0.1	|5.6	|2.0	|3.6	|3.0	|7.0	|3.9	|90.5	|3.9
+|2032      |0.0	        |5.6	|2.0	|3.6	|3.0	|7.0	|3.9	|91.7	|3.9
+|2033      |0.1	        |5.7	|2.0	|3.6	|3.0	|7.0	|3.9	|92.7	|3.9
+
+*Note 1: "w.r.t." means "with respect to".*
+
+*Note 2: the values are illustrative. They may be different from those used elsewhere in this guide.*
+:::
+
+
+To import the data into R, save your `my_data.xlsx` file in R's working directory and run the command below. The output will be an `xts` object, to be used by other functions.
+
+
+```{r import, eval=FALSE}
+i <- import_custom_data(
+  realized_data = list(
+    file_type = "xlsx",
+    file_path = "my_data.xlsx",
+    sheet = "realized_data",
+    start="2013-12-01",
+    end="2023-12-01",
+    frequency="year"
+  ),
+  baseline_scenario = list(
+    file_type = "xlsx",
+    file_path = "my_data.xlsx",
+    sheet = "baseline_scenario",
+    start="2024-12-01",
+    end="2033-12-01",
+    frequency="year"
+  )
+)
+```
+
+# 3) Generate random shocks
+
+To generate shocks, you can choose from cases `normal` (i.e. normal probability distributions) or `ec` (acronym for "European Commission method"). The following code uses case `ec` to generate 1.000 shocks per year, for each debt determinant (nominal interest rate, GDP deflator, real GDP growth and primary balance).
+
+```{r shocks, eval=TRUE}
+shocks <- shocks_generator(
+  case = "ec",
+  n_stochastic_scenarios = 1000,
+  realized_data = sample_series$realized_yearly_data,
+  subintervals = "2009-12-01/2019-12-01",
+  shocks_first_date = "2024-12-01",
+  shocks_last_date = "2028-12-01",
+  shocks_frequency = "year",
+  i = "nominal interest rate",
+  ti = "gdp deflator",
+  g = "real gdp growth",
+  p = "primary balance"
+)
+```
+By setting `subintervals = "2009-12-01/2019-12-01"`, we use only historical values before the Covid-19 pandemic (2020), avoiding observations subject to extreme changes.
+
+The command above outputs a list with four elements:
+
+* `shocks`: the shocks _per se_ (a `list` with 1.000 elements, each an `xts` object with one column per debt determinant).
+* `historical_shocks`: time series from which shocks have been drawn. These are simply the first differences of the realized series.
+* `var_cov_historical_shocks`: variance-covariance matrix of the historical shocks.
+* `correlation_tests`: p-values of significance tests (Pearson, Spearman and Kendall) of correlations among shocks.
+
+```{r see_shocks, eval=TRUE}
+# The first group of shocks, out of 1.000
+shocks$shocks[[1]]
+
+# Historical shocks
+shocks$historical_shocks
+
+# Variance-covariance matrix
+shocks$var_cov_historical_shocks
+
+# P-values of correlation tests (Pearson, Spearman and Kendall tests)
+shocks$correlation_tests
+```
+
+## 3.1) Generate charts of shocks
+
+You can create charts of the random shocks, for the purpose of visual diagnosis. The command below creates one chart per variable. In each chart, you can see:
+
+* to the **left** of the chart, the time series of first differences (from which shocks have been drawn^[When `case = "ec"` in `shocks_generator`, as we have set in this example.]).
+* to the **right**, paths of sampled shocks.
+* at the center, an empty area, corresponding to the realized observations which have not been used to draw shocks (years since 2020).
+
+At first sight, the left-hand series appears to take a value at 2020. This is only a misleading visual effect due to the chart scale, which is in months. The last observation actually refers to December 2019, as specified in argument `subintervals` of function `shocks_generator()`. To the right of the charts, you can see 100 paths of sampled shocks.
+
+Note that function `charts()` will plot only a few paths (not all 1.000) to avoid computational burden. The number of plotted paths is set in argument `max_to_plot`, which defaults to 100.
+
+```{r shocks_charts, eval=TRUE}
+x <- charts(object = shocks, type = "shocks")
+```
+
+You can view **non-interactive** charts, built with package `ggplot2`, by running:
+```{r view_charts_1, eval=TRUE, echo=TRUE}
+# Non-interactive chart for shocks on nominal interest rate
+x$list_of_charts$shocks$ggplot[["nominal interest rate"]]
+# Non-interactive chart for shocks on real GDP growth
+x$list_of_charts$shocks$ggplot[["real gdp growth"]]
+```
+
+For **interactive** charts, built with package `dygraphs`, run:
+```{r view_charts_2, eval=TRUE, echo=TRUE}
+# Interactive chart for shocks on nominal interest rate
+x$list_of_charts$shocks$dygraphs[["nominal interest rate"]]
+# Interactive chart for shocks on real GDP growth
+x$list_of_charts$shocks$dygraphs[["real gdp growth"]]
+```
+
+# 4) Simulate stochastic scenarios
+Using the shocks generated above, we can finally simulate 1.000 stochastic scenarios for debt determinants and, most importantly, debt itself.
+```{r simulation, eval=TRUE}
+s <- sim(
+  first_date_to_simulate = "2024-12-01",
+  last_date_to_simulate = "2028-12-01",
+  realized_data = sample_series$realized_yearly_data,
+  baseline_scenario = sample_series$baseline_yearly_scenario,
+  baseline_as_median = TRUE,
+  n_stochastic_scenarios = 1000,
+  shocks = shocks$shocks,
+  d = "debt",
+  i = "nominal interest rate",
+  ti = "gdp deflator",
+  r = "real interest rate (w.r.t. gdp deflator)",
+  g = "real gdp growth",
+  p = "primary balance"
+)
+```
+
+To see the first simulated stochastic scenario, run
+```{r see_simulation_1, eval=TRUE}
+s$scenarios$stochastic_scenarios[[1]]
+```
+
+To see the deterministic baseline scenario appended to realized values, run:
+```{r see_simulation_2, eval=TRUE}
+s$scenarios$baseline_scenario
+```
+
+Note that the call to function `sim` only worked because our variables (e.g. real GDP growth) have the same name across the three arguments `realized_data`, `baseline_scenario` and `shocks`. If the names were not identical, the call should have been the following.
+```{r simulation non-identical variable names, eval=TRUE}
+s <- sim(
+  first_date_to_simulate = "2024-12-01",
+  last_date_to_simulate = "2028-12-01",
+  realized_data = sample_series$realized_yearly_data,
+  baseline_scenario = sample_series$baseline_yearly_scenario,
+  baseline_as_median = TRUE,
+  n_stochastic_scenarios = 1000,
+  shocks = shocks$shocks,
+  d = list(
+    realized="debt",
+    baseline="debt"
+  ),
+  i = list(
+    realized="nominal interest rate",
+    baseline="nominal interest rate",
+    shocks="nominal interest rate"
+  ),
+  ti = list(
+    realized="gdp deflator",
+    baseline="gdp deflator",
+    shocks="gdp deflator"
+  ),
+  r = list(
+    realized="real interest rate (w.r.t. gdp deflator)",
+    baseline="real interest rate (w.r.t. gdp deflator)"
+  ),
+  g = list(
+    realized="real gdp growth",
+    baseline="real gdp growth",
+    shocks="real gdp growth"
+  ),
+  p = list(
+    realized="primary balance",
+    baseline="primary balance",
+    shocks="primary balance"
+  )
+)
+```
+
+
+## 4.1) Generate charts of stochastic scenarios
+
+Two charts are available for each variable:
+
+* a chart with many stochastic paths.
+* a fan chart.
+
+The first chart will plot only a few paths (not all 1.000) to avoid computational burden. The number of plotted paths is set in argument `max_to_plot`, which defaults to 100.
+```{r scenarios_charts, eval=TRUE}
+x <- charts(
+  object = s,
+  type = "simulation",
+  fan_chart_percentiles = c(0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9)
+)
+```
+
+You can view **non-interactive** charts, built with package `ggplot2`, by running:
+```{r view_charts_3, eval=TRUE, echo=TRUE}
+# Non-interactive chart of paths for debt
+x$list_of_charts$paths$ggplot[["debt"]]
+# Non-interactive fan chart for debt
+x$list_of_charts$fancharts$ggplot[["debt"]]
+
+# Non-interactive chart of paths for primary balance
+x$list_of_charts$paths$ggplot[["primary balance"]]
+# Non-interactive fan chart for primary balance
+x$list_of_charts$fancharts$ggplot[["primary balance"]]
+```
+
+For **interactive** charts of paths, built with package `dygraphs`, run:
+```{r view_charts_4, eval=TRUE, echo=TRUE}
+# Interactive chart of paths for debt
+x$list_of_charts$paths$dygraphs[["debt"]]
+# Interactive chart of paths for primary balance
+x$list_of_charts$paths$dygraphs[["primary balance"]]
+```
+
+Interactive fan charts have not been implemented yet.
+
+# 5) Estimate probabilities
+
+To estimate the probability of events regarding future debt, use function `event_prob`. In the example below, we set the threshold at 90\% of the GDP.
+
+```{r event_prob, eval=TRUE}
+e <- event_prob(
+  object = s,
+  d = "debt",
+  threshold = 90,
+  interval = list(start="2024-12-01",end="2028-12-01")
+)
+```
+Results can be checked running:
+
+```{r see_event_prob, eval=TRUE, echo=TRUE}
+e
+```
+
+# 6) Export tables and fan charts to an xlsx file
+
+You can export tables with the simulated stochastic scenarios, as well as associated fan charts, to an xlsx file. To have fan charts drawn, you must have Python installed in your computer.^[For details, see section [Initial check for Python](#initial-check-for-python)] The function can also export other types of excel files (see examples in the documentation of `export_to_excel`).
+
+```{r export, eval=FALSE}
+export_to_excel(
+  object = s,
+  type = "simulation",
+  percentiles = c(0.1,0.25,0.5,0.75,0.9),
+  filename = "simulation_results.xlsx",
+  draw_charts = c("debt","primary balance"),
+  date_format = "yyyy",
+  y_axis = list(debt = c(50,100))
+)
+```
+
+# Further details
+
+## Debt dynamics equation
+
+The debt dynamics equation (DDE) used by function `sim` to produce scenarios for debt is
+
+$$
+d_t = \frac{(1+r_t)}{(1+g_t)}d_{t-1} - pb_t
+$$
+
+where
+
+* $d_t$ is debt in percentage of GDP at period $t$;
+* $r_t$ is the real interest rate (with respect to the **GDP deflator**) at period $t$;
+* $pb_t$ is the primary balance of the government, in percentage of GDP, at period $t$.
+
+If you input objects to arguments `tic` and `r_tic` in function `sim`, then the DDE formula used to generate the scenarios is different, but algebraically equivalent to the previous one:
+
+$$
+d_t = \frac{(1+\pi_t^{CPI})}{(1+\pi_t)}\frac{(1+r_t^{CPI})}{(1+g_t)}d_{t-1} - pb_t
+$$
+
+where
+
+* $r_t^{CPI}$ is the real interest rate (with respect to **consumer price index**) at period $t$;
+* $\pi_t^{CPI}$ is inflation with respect to the **consumer price index** at period $t$;
+* $\pi_t$ is inflation with respect to the **GDP deflator** at period $t$.
+
+The purpose of this second form of the DDE is to afford consistency checks. That is, it is useful for validation of the computations. For everyday generation of fan charts, the choice between the equations is innocuous for the user.
+
+A practical advantage of inputting `tic` and `r_tic` in function `sim` is the possibility to generate fan charts of consumer inflation ($\pi_t^{CPI}$) and the associated real interest rate ($r_t^{CPI}$).
+
+## Initial check for python {#initial-check-for-python}
+
+When the package loads after the user issues `library(stocdebt)`, the package looks for a Python installation in the computer (by means of its internal `.onLoad()` function, not visible to the user). However, Python is necessary only to export charts to xlsx files. Thus, even if there is no Python installation, all other features will work appropriately.
+
+## Understanding the source code
+
+To see the source code of `stocdebt` with **comments**, for easier understanding of the purpose of each chunk, users are encouraged to visit the code [online repository](https://github.com/ifibrasil/stocdebt). While the R source code in the packaged version excludes comments, the version available on GitHub preserves them.
+
+## Improvements/extensions to the package
+
+The code can be improved in several ways. These are some possible enhancements:
+
+* **probability of more events**: extend the list of events of interest, whose probability is estimated by function `event_prob`;
+* **better printing of function outputs**: for example, create a table, to be printed to the terminal, with the estimates returned by `event_prob`, where each row would contain the description of the event and its numerical estimate; 
+* **validation tests**: develop unit tests and add more error handlers to the functions;
+* **additional strategies to generate shocks**: function `shocks` has been written so that it could be easily extended, accepting new `if` blocks, which are selected according to argument `case`. The developer can take advantage of this and add new shock simulators into the function.
+
+Note that most functions of the package return a `list` as its value. This means that, if a developer wants to extend a function so that a new piece of output is returned, he/she can simply add the new object to that `list`. By doing so, the rest of the package will continue to work properly.
+
+### Classes and methods
+
+The code has been developed without creating new classes and methods of R. The aim of this decision was to make the code understandable by a wider audience. However, as a consequence, there are more conditions (`if`) internally, across the functions. Insofar as the amount of conditioning is tractable, we do not intend to use classes and methods.
+
+### Efficiency
+
+There will always be room for improvement in efficiency, that is, faster simulations. To those developers willing to propose more efficient code, we suggest that they ensure the new version is not difficult to understand for a broad audience. For example, some loops could be replaced with vector operations, but such replacement may make the role of the code chunk less evident in the overall computations executed by a function.

@@ -1,0 +1,18 @@
+Package: stocdebt
+Version: 0.2.0
+Date: 2025-09-12
+Title: Simulation of stochastic scenarios for public debt and its determinants
+Authors@R: c(person("Alessandro","Casalecchi",role=c("aut","cre"),email="alessandro.casalecchi@senado.leg.br"), person("Pedro","Souza",role=c("ctb","cre"),email="pedro.oliveira.souza@senado.leg.br"))
+Author: Alessandro Casalecchi [aut,cre], Pedro Souza [ctb,cre]
+Maintainer: Alessandro Casalecchi <alessandro.casalecchi@senado.leg.br>, Pedro Souza <pedro.henrique.souza@senado.leg.br>
+Depends: R (>= 4.4.0)
+Imports: MASS, readr, withr, zoo, dplyr, dygraphs, ggplot2, openxlsx, rlang, tidyr, scales, reticulate, xts
+Suggests: knitr, rmarkdown
+VignetteBuilder: knitr
+VignetteIndex: vignette
+LazyData: true
+Description: Functions to simulate stochastic scenarios for public debt and its determinants, as well as compute probabilities of future events regarding public debt.
+License: GPL-3
+Encoding: UTF-8
+URL: https://github.com/ifibrasil/stocdebt
+BugReports: https://github.com/ifibrasil/stocdebt

@@ -1,0 +1,6 @@
+stocdebt.Rcheck/
+stocdebt_*
+auxiliary_commands.sh
+compare.sh
+stocdebt-manual.pdf
+vignette.html
