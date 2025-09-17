@@ -4,7 +4,8 @@ charts <- function(
 	fan_chart_percentiles=NULL,
 	seed_if_limited_export=1,
 	fan_color = "#005d89",
-	max_to_plot = 100
+	max_to_plot = 100,
+	add_horizontal_line = list()
 ){
 
 	# Initializes lists which will store final tables and charts, to be returned by the function
@@ -88,12 +89,19 @@ charts <- function(
 			}
 
 			# Creates a "dygraph" chart for the paths of each variable
-			paths_charts[["dygraphs"]][[v]] <- 
-				dygraphs::dygraph(paths_tabs[[v]], xlab = "Period",main = v) %>%
-				dygraphs::dyHighlight( 
-					highlightSeriesBackgroundAlpha = 0.2,
-					highlightCircleSize = 0) %>%
-				dygraphs::dyLegend(show = "never")
+				paths_charts[["dygraphs"]][[v]] <- 
+					dygraphs::dygraph(paths_tabs[[v]], xlab = "Period",main = v) %>%
+					dygraphs::dyHighlight( 
+						highlightSeriesBackgroundAlpha = 0.2,
+						highlightCircleSize = 0) %>%
+					dygraphs::dyLegend(show = "never")
+
+				# Adds horizontal line, if requested by the user
+				if (base::length(add_horizontal_line) > 0){
+					paths_charts[["dygraphs"]][[v]] <- 
+						paths_charts[["dygraphs"]][[v]] +
+						dygraphs::dyLimit(limit = add_horizontal_line[[v]], label = base::as.character(add_horizontal_line[[v]]))
+				}
 
 			# Creates a "ggplot" chart for the paths of each variable
 
@@ -111,6 +119,13 @@ charts <- function(
 					ggplot2::geom_line(data=dplyr::filter(temp,.data$Scenario == "Baseline scenario"),color="black",linewidth=2) +
 					ggplot2::theme(legend.position = "none") +
 					ggplot2::labs(title = v, y = NULL, x = NULL)
+
+				# Adds horizontal line, if requested by the user
+				if (base::length(add_horizontal_line) > 0){
+					paths_charts[["ggplot"]][[v]] <-
+						paths_charts[["ggplot"]][[v]] +
+						ggplot2::geom_hline(yintercept = add_horizontal_line[[v]], color = "black")
+				}
 		}
 
 		list_of_tables[["paths"]] <- paths_tabs
@@ -282,6 +297,12 @@ charts <- function(
 							ggplot2::geom_line(data=stats::na.omit(table_for_plotting) %>% dplyr::filter(.data$Percentile == temp),color=fan_color)
 
 					}
+					# Adds horizontal line, if requested by the user
+					if (base::length(add_horizontal_line) > 0){
+						fancharts_grafs[["ggplot"]][[v]] <-
+							fancharts_grafs[["ggplot"]][[v]] +
+							ggplot2::geom_hline(yintercept = add_horizontal_line[[v]], color = "black")
+					}
 			}
 
 			list_of_tables[["fancharts (paths)"]] <- fancharts_tabs[["paths"]]
@@ -354,12 +375,19 @@ charts <- function(
 			shocks_tabs[[v]] <- temp
 
 			# Creates a "dygraph" chart for the shocks of each variable
-			shocks_grafs[["dygraphs"]][[v]] <- 
-				dygraphs::dygraph(shocks_tabs[[v]], xlab = "Period",main = base::paste(v,"(first difference)")) %>%
-				dygraphs::dyHighlight( 
-					highlightSeriesBackgroundAlpha = 0.2,
-					highlightCircleSize = 0) %>%
-				dygraphs::dyLegend(show = "never")
+				shocks_grafs[["dygraphs"]][[v]] <- 
+					dygraphs::dygraph(shocks_tabs[[v]], xlab = "Period",main = base::paste(v,"(first difference)")) %>%
+					dygraphs::dyHighlight( 
+						highlightSeriesBackgroundAlpha = 0.2,
+						highlightCircleSize = 0) %>%
+					dygraphs::dyLegend(show = "never")
+
+				# Adds horizontal line, if requested by the user
+				if (base::length(add_horizontal_line) > 0){
+					shocks_grafs[["dygraphs"]][[v]] <- 
+						shocks_grafs[["dygraphs"]][[v]] +
+						dygraphs::dyLimit(limit = add_horizontal_line[[v]], label = base::as.character(add_horizontal_line[[v]]))
+				}
 
 			# Creates a "ggplot" chart for the shocks of each variable
 
@@ -376,6 +404,13 @@ charts <- function(
 					ggplot2::geom_line(ggplot2::aes(color = .data$Scenario), linewidth = 1) +
 					ggplot2::theme(legend.position = "none") +
 					ggplot2::labs(title = base::paste(v,"(first difference)"), y = NULL, x = NULL)
+
+				# Adds horizontal line, if requested by the user
+				if (base::length(add_horizontal_line) > 0){
+					shocks_grafs[["ggplot"]][[v]] <-
+						shocks_grafs[["ggplot"]][[v]] +
+						ggplot2::geom_hline(yintercept = add_horizontal_line[[v]], color = "black")
+				}
 		}
 
 		 list_of_tables[["shocks"]] <- shocks_tabs
