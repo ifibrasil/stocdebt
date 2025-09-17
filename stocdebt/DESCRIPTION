@@ -1,6 +1,6 @@
 Package: stocdebt
-Version: 0.2.0
-Date: 2025-09-12
+Version: 1.0.0
+Date: 2025-09-19
 Title: Simulation of stochastic scenarios for public debt and its determinants
 Authors@R: c(person("Alessandro","Casalecchi",role=c("aut","cre"),email="alessandro.casalecchi@senado.leg.br"), person("Pedro","Souza",role=c("ctb","cre"),email="pedro.oliveira.souza@senado.leg.br"))
 Author: Alessandro Casalecchi [aut,cre], Pedro Souza [ctb,cre]

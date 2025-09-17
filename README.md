@@ -6,7 +6,7 @@ Package `stocdebt` is useful to
 * simulate stochastic scenarios for public debt and its determinants (real GDP growth, inflation, primary balance and interest rates);
 * estimate the probability of events related to public debt.
 
-You can read the package vignette [here](https://github.com/ifibrasil/stocdebt/releases/download/0.2.0/vignette.html).
+You can read the package vignette [here](https://github.com/ifibrasil/stocdebt/releases/download/1.0.0/vignette.html).
 
 ## Installation
 
@@ -20,9 +20,9 @@ install.packages("remotes")
 remotes::install_github("ifibrasil/stocdebt/stocdebt@<VERSION>", build_vignettes = TRUE, upgrade = "never")
 ```
 
-The `<VERSION>` placeholder must be replaced with one of the **stable** version numbers of the package. For example, `"ifibrasil/stocdebt/stocdebt@0.2.0"`. These numbers are on the "Release" list of this repository (right panel of this website). In case `@<VERSION>` is omitted from the command, a **development** version (subject to errors) of the package will possibly be installed.
+The `<VERSION>` placeholder must be replaced with one of the **stable** version numbers of the package. For example, `"ifibrasil/stocdebt/stocdebt@1.0.0"`. These numbers are on the "Release" list of this repository (right panel of this website). In case `@<VERSION>` is omitted from the command, a **development** version (subject to errors) of the package will possibly be installed.
 
-By the time this text is written, the latest stable version is `0.2.0`, but this number will change over time.
+By the time this text is written, the latest stable version is `1.0.0`, but this number will change over time.
 
 If you have already installed the package and want to verify the version, run
 
@@ -30,7 +30,7 @@ If you have already installed the package and want to verify the version, run
 utils::packageDescription("stocdebt")$RemoteRef
 ```
 
-If the output is `"<VERSION>"` (currently, `"0.2.0"`), your installation is correct. It is the latest stable version. If the output is `"HEAD"`, you installed the development version.
+If the output is `"<VERSION>"` (currently, `"1.0.0"`), your installation is correct. It is the latest stable version. If the output is `"HEAD"`, you installed the development version.
 
 Argument `build_vignettes = TRUE` is optional. If you do not use it, the package will be installed, but without an additional "User guide". Only standard documentation (help files) will be available.
 
@@ -42,7 +42,7 @@ The package has been used in some editions of the institution's [Fiscal Follow-U
 
 ## Standard R documentation in PDF
 
-To read the documentation of `stocdebt` in PDF form, generated according to R standard, check [stocdebt-manual.pdf](https://github.com/ifibrasil/stocdebt/releases/download/0.2.0/stocdebt-manual.pdf).
+To read the documentation of `stocdebt` in PDF form, generated according to R standard, check [stocdebt-manual.pdf](https://github.com/ifibrasil/stocdebt/releases/download/1.0.0/stocdebt-manual.pdf).
 
 ## Code improvements
 
@@ -70,7 +70,7 @@ O pacote `stocdebt` é útil para
 * simular cenários estocásticos para a dívida pública e seus determinantes (crescimento real do PIB, inflação, resultado primário e taxa de juros);
 * estimar a probabilidade de eventos relacionados à dívida pública.
 
-Leia a *vignette* do pacote [aqui](https://github.com/ifibrasil/stocdebt/releases/download/0.2.0/vignette.html).
+Leia a *vignette* do pacote [aqui](https://github.com/ifibrasil/stocdebt/releases/download/1.0.0/vignette.html).
 
 ## Instalação
 
@@ -84,9 +84,9 @@ install.packages("remotes")
 remotes::install_github("ifibrasil/stocdebt/stocdebt@<VERSÃO>", build_vignettes = TRUE, upgrade = "never")
 ```
 
-O trecho `<VERSÃO>` deve ser substituído por um dos números de versão **estável** do pacote, que constam na lista de "Versões" (ou "*Releases*") deste repositório (painel direito desta página web). Por exemplo, `"ifibrasil/stocdebt/stocdebt@0.2.0"`. Caso `@<VERSÃO>` seja omitido do comando, possivelmente será instalada uma versão em **desenvolvimento** do pacote, que está sujeita a falhas.
+O trecho `<VERSÃO>` deve ser substituído por um dos números de versão **estável** do pacote, que constam na lista de "Versões" (ou "*Releases*") deste repositório (painel direito desta página web). Por exemplo, `"ifibrasil/stocdebt/stocdebt@1.0.0"`. Caso `@<VERSÃO>` seja omitido do comando, possivelmente será instalada uma versão em **desenvolvimento** do pacote, que está sujeita a falhas.
 
-No momento em que este texto é escrito, a versão estável mais recente é a `0.2.0`, mas a numeração mudará conforme o tempo passar.
+No momento em que este texto é escrito, a versão estável mais recente é a `1.0.0`, mas a numeração mudará conforme o tempo passar.
 
 Se o(a) usuário(a) já instalou o pacote e deseja verificar a versão, basta executar
 
@@ -94,7 +94,7 @@ Se o(a) usuário(a) já instalou o pacote e deseja verificar a versão, basta ex
 utils::packageDescription("stocdebt")$RemoteRef
 ```
 
-Se o resultado for `"<VERSÃO>"` (no caso atual, `"0.2.0"`), a instalação está correta. É a versão estável mais recente. Se o resultado for `"HEAD"`, trata-se da versão em desenvolvimento.
+Se o resultado for `"<VERSÃO>"` (no caso atual, `"1.0.0"`), a instalação está correta. É a versão estável mais recente. Se o resultado for `"HEAD"`, trata-se da versão em desenvolvimento.
 
 O argumento `build_vignettes = TRUE` é opcional. Se o(a) usuário(a) não utilizá-lo, o pacote será instalado sem um guia de usuário ("*User guide*"). Apenas a documentação padrão (*help files*) estará disponível.
 
@@ -106,7 +106,7 @@ O pacote foi usado para elaborar algumas edições do [Relatório de Acompanhame
 
 ## Documentação em PDF no padrão R
 
-A documentação em PDF do pacote `stocdebt`, gerado conforme o padrão do R, pode ser consultado em [stocdebt-manual.pdf](https://github.com/ifibrasil/stocdebt/releases/download/0.2.0/stocdebt-manual.pdf).
+A documentação em PDF do pacote `stocdebt`, gerado conforme o padrão do R, pode ser consultado em [stocdebt-manual.pdf](https://github.com/ifibrasil/stocdebt/releases/download/1.0.0/stocdebt-manual.pdf).
 
 ## Aprimoramentos do código
 
