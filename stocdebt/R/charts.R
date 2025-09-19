@@ -5,6 +5,7 @@ charts <- function(
 	seed_if_limited_export=1,
 	fan_color = "#005d89",
 	max_to_plot = 100,
+	y_axis = list(),
 	add_horizontal_line = list()
 ){
 
@@ -96,11 +97,22 @@ charts <- function(
 						highlightCircleSize = 0) %>%
 					dygraphs::dyLegend(show = "never")
 
+				# Sets limits of vertical axis, if requested by the user
+				if (base::length(y_axis) > 0){
+					paths_charts[["dygraphs"]][[v]] <- 
+						paths_charts[["dygraphs"]][[v]] |>
+						dygraphs::dyAxis("y", valueRange = base::c(y_axis[[v]][1], y_axis[[v]][2]))
+				}
+
 				# Adds horizontal line, if requested by the user
 				if (base::length(add_horizontal_line) > 0){
 					paths_charts[["dygraphs"]][[v]] <- 
-						paths_charts[["dygraphs"]][[v]] +
-						dygraphs::dyLimit(limit = add_horizontal_line[[v]], label = base::as.character(add_horizontal_line[[v]]))
+						paths_charts[["dygraphs"]][[v]] |>
+						dygraphs::dyLimit(
+							limit = add_horizontal_line[[v]],
+							label = base::as.character(add_horizontal_line[[v]]),
+							strokePattern = "dashed"
+						)
 				}
 
 			# Creates a "ggplot" chart for the paths of each variable
@@ -120,11 +132,22 @@ charts <- function(
 					ggplot2::theme(legend.position = "none") +
 					ggplot2::labs(title = v, y = NULL, x = NULL)
 
+				# Sets limits of vertical axis, if requested by the user
+				if (base::length(y_axis) > 0){
+					paths_charts[["ggplot"]][[v]] <-
+						paths_charts[["ggplot"]][[v]] +
+						ggplot2::coord_cartesian(ylim = base::c(y_axis[[v]][1], y_axis[[v]][2]))
+				}
+
 				# Adds horizontal line, if requested by the user
 				if (base::length(add_horizontal_line) > 0){
 					paths_charts[["ggplot"]][[v]] <-
 						paths_charts[["ggplot"]][[v]] +
-						ggplot2::geom_hline(yintercept = add_horizontal_line[[v]], color = "black")
+						ggplot2::geom_hline(
+							yintercept = add_horizontal_line[[v]],
+							color = "black",
+							linetype = "dashed"
+						)
 				}
 		}
 
@@ -297,11 +320,21 @@ charts <- function(
 							ggplot2::geom_line(data=stats::na.omit(table_for_plotting) %>% dplyr::filter(.data$Percentile == temp),color=fan_color)
 
 					}
+					# Sets limits of vertical axis, if requested by the user
+					if (base::length(y_axis) > 0){
+						fancharts_grafs[["ggplot"]][[v]] <-
+							fancharts_grafs[["ggplot"]][[v]] +
+							ggplot2::coord_cartesian(ylim = base::c(y_axis[[v]][1], y_axis[[v]][2]))
+					}
 					# Adds horizontal line, if requested by the user
 					if (base::length(add_horizontal_line) > 0){
 						fancharts_grafs[["ggplot"]][[v]] <-
 							fancharts_grafs[["ggplot"]][[v]] +
-							ggplot2::geom_hline(yintercept = add_horizontal_line[[v]], color = "black")
+							ggplot2::geom_hline(
+								yintercept = add_horizontal_line[[v]],
+								color = "black",
+								linetype = "dashed"
+							)
 					}
 			}
 
@@ -382,11 +415,22 @@ charts <- function(
 						highlightCircleSize = 0) %>%
 					dygraphs::dyLegend(show = "never")
 
+				# Sets limits of vertical axis, if requested by the user
+				if (base::length(y_axis) > 0){
+					shocks_grafs[["dygraphs"]][[v]] <- 
+						shocks_grafs[["dygraphs"]][[v]] |>
+						dygraphs::dyAxis("y", valueRange = base::c(y_axis[[v]][1], y_axis[[v]][2]))
+				}
+
 				# Adds horizontal line, if requested by the user
 				if (base::length(add_horizontal_line) > 0){
 					shocks_grafs[["dygraphs"]][[v]] <- 
-						shocks_grafs[["dygraphs"]][[v]] +
-						dygraphs::dyLimit(limit = add_horizontal_line[[v]], label = base::as.character(add_horizontal_line[[v]]))
+						shocks_grafs[["dygraphs"]][[v]] |>
+						dygraphs::dyLimit(
+							limit = add_horizontal_line[[v]],
+							label = base::as.character(add_horizontal_line[[v]]),
+							strokePattern = "dashed"
+						)
 				}
 
 			# Creates a "ggplot" chart for the shocks of each variable
@@ -405,11 +449,22 @@ charts <- function(
 					ggplot2::theme(legend.position = "none") +
 					ggplot2::labs(title = base::paste(v,"(first difference)"), y = NULL, x = NULL)
 
+				# Sets limits of vertical axis, if requested by the user
+				if (base::length(y_axis) > 0){
+					shocks_grafs[["ggplot"]][[v]] <-
+						shocks_grafs[["ggplot"]][[v]] +
+						ggplot2::coord_cartesian(ylim = base::c(y_axis[[v]][1], y_axis[[v]][2]))
+				}
+
 				# Adds horizontal line, if requested by the user
 				if (base::length(add_horizontal_line) > 0){
 					shocks_grafs[["ggplot"]][[v]] <-
 						shocks_grafs[["ggplot"]][[v]] +
-						ggplot2::geom_hline(yintercept = add_horizontal_line[[v]], color = "black")
+						ggplot2::geom_hline(
+							yintercept = add_horizontal_line[[v]],
+							color = "black",
+							linetype = "dashed"
+						)
 				}
 		}
 
