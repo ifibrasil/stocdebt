@@ -2,7 +2,7 @@
 
 ## Windows (archive `stocdebt_windows.zip`)
 
-After downloading `stocdebt_windows.zip`, run the following commands, replacing argument `pkgs` with the path to `stocdebt_windows.zip` in your computer.
+After downloading `stocdebt_windows.zip`, run the following commands, replacing argument `pkgs` with the path to `stocdebt_windows.zip` on your computer.
 
 ```{r}
 # Install dependencies (other packages on which "stocdebt" depends to work appropriately)
@@ -14,7 +14,7 @@ install.packages(pkgs = "C:\...\...\stocdebt_windows.zip", repos = NULL)
 
 ## Linux (archive `stocdebt_linux.tar.gz`)
 
-After downloading `stocdebt_linux.tar.gz`, run the following commands, replacing argument `pkgs` with the path to `stocdebt_linux.tar.gz` in your computer.
+After downloading `stocdebt_linux.tar.gz`, run the following commands, replacing argument `pkgs` with the path to `stocdebt_linux.tar.gz` on your computer.
 
 ```{r}
 # Install dependencies (other packages on which "stocdebt" depends to work appropriately)

@@ -26,7 +26,9 @@ Suggestions and bug reports can be submitted to ifi&#64;senado&#46;leg&#46;br or
 
 # 1) Setup
 
-To install the package from the online repository, run
+To install the package from the online repository, run (if you cannot install directly from GitHub, see [Installing from downloaded archives](#installing-from-downloaded-archives)).
+
+)download the compressed archives in the release assets (`stocdebt_windows.zip` for Windows and `stocdebt_linux.tar.gz` for Linux), and follow the [instructions to install from them](INSTALL_FROM_ARCHIVES.md).
 ```{r install, eval=FALSE}
 # Install auxiliary package "remotes"
 install.packages("remotes")       
@@ -52,7 +54,7 @@ Argument `build_vignettes = TRUE` is optional. If you do not use it, the package
 Argument `upgrade = "never"` also is optional, but simplifies the installation process.
 
 Next, load the package.
-```{r load, eval=TRUE}
+```{r load, eval=FALSE}
 library(stocdebt)
 ```
 
@@ -459,3 +461,31 @@ The code has been developed without creating new classes and methods of R. The a
 ### Efficiency
 
 There will always be room for improvement in efficiency, that is, faster simulations. To those developers willing to propose more efficient code, we suggest that they ensure the new version is not difficult to understand for a broad audience. For example, some loops could be replaced with vector operations, but such replacement may make the role of the code chunk less evident in the overall computations executed by a function.
+
+## Appendix: installing from downloaded archives {#installing-from-downloaded-archives}
+
+If you cannot install directly from GitHub, download the compressed archives on GitHub [release assets](https://github.com/ifibrasil/stocdebt/releases) (`stocdebt_windows.zip` for Windows and `stocdebt_linux.tar.gz` for Linux).
+
+### On Windows (archive `stocdebt_windows.zip`)
+
+After downloading `stocdebt_windows.zip`, run the following commands, replacing argument `pkgs` with the path to `stocdebt_windows.zip` on your computer.
+
+```{r, eval=FALSE}
+# Install dependencies (other packages on which "stocdebt" depends to work appropriately)
+install.packages(c("MASS", "readr", "withr", "zoo", "dplyr", "dygraphs", "ggplot2", "openxlsx", "rlang", "tidyr", "scales", "reticulate", "xts"))
+
+# Install package "stocdebt"
+install.packages(pkgs = "C:\...\...\stocdebt_windows.zip", repos = NULL)
+```
+
+## On Linux (archive `stocdebt_linux.tar.gz`)
+
+After downloading `stocdebt_linux.tar.gz`, run the following commands, replacing argument `pkgs` with the path to `stocdebt_linux.tar.gz` on your computer.
+
+```{r, eval=FALSE}
+# Install dependencies (other packages on which "stocdebt" depends to work appropriately)
+install.packages(c("MASS", "readr", "withr", "zoo", "dplyr", "dygraphs", "ggplot2", "openxlsx", "rlang", "tidyr", "scales", "reticulate", "xts"))
+
+# Install package "stocdebt"
+install.packages(pkgs = "/.../.../stocdebt_linux.tar.gz", repos = NULL)
+```
