@@ -10,6 +10,8 @@ You can read the package vignette [here](https://github.com/ifibrasil/stocdebt/r
 
 ## Installation
 
+### Directly from GitHub
+
 To install directly from GitHub, you can use function `install_github` from package `remotes`, for example.
 
 ```{r}
@@ -35,6 +37,10 @@ If the output is `"<VERSION>"` (currently, `"1.0.0"`), your installation is corr
 Argument `build_vignettes = TRUE` is optional. If you do not use it, the package will be installed, but without an additional "User guide". Only standard documentation (help files) will be available.
 
 Argument `upgrade = "never"` is also optional, but it simplifies the installation process.
+
+### Installing from downloaded `.tar.gz` and `.zip` files
+
+If you cannot install directly from GitHub, download the compressed archives in the release assets (`stocdebt_windows.zip` for Windows and `stocdebt_linux.tar.gz` for Linux), and follow the [instructions to install from them](INSTALL_FROM_ARCHIVES.md).
 
 ## Methodology
 
@@ -74,6 +80,8 @@ Leia a *vignette* do pacote [aqui](https://github.com/ifibrasil/stocdebt/release
 
 ## Instalação
 
+### Diretamente do GitHub
+
 Para instalar diretamente do GitHub, pode-se usar a função `install_github` do pacote `remotes`, por exemplo.
 
 ```{r}
@@ -99,6 +107,10 @@ Se o resultado for `"<VERSÃO>"` (no caso atual, `"1.0.0"`), a instalação est�
 O argumento `build_vignettes = TRUE` é opcional. Se o(a) usuário(a) não utilizá-lo, o pacote será instalado sem um guia de usuário ("*User guide*"). Apenas a documentação padrão (*help files*) estará disponível.
 
 O argumento `upgrade = "never"` também é opcional, mas simplifica o processo de instalação.
+
+### Instalação a partir dos arquivos `.tar.gz` e `.zip` baixados
+
+Se não for possível instalar diretamente do GitHub, baixe os arquivos anexos à versão de interesse (por exemplo, 1.0.0). Os arquivos são `stocdebt_windows.zip` (para Windows) e `stocdebt_linux.tar.gz` (para Linux). Depois, siga as [instruções para instalação via arquivos](INSTALL_FROM_ARCHIVES.md).
 
 ## Metodologia
 
