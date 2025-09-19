@@ -98,12 +98,11 @@ i <- import_custom_data(
     end="2033-12-01",
     frequency="year"
   )
-)}
+)
 
 ## Import (1) realized data, (2) baseline scenario and (3) shocks
 ## from an xlsx file, where six distinct shock scenarios are available
 ## across worksheets 3 through 8
-\dontrun{
 i <- import_custom_data(
   realized_data = list(
     file_type = "xlsx",
@@ -130,5 +129,6 @@ i <- import_custom_data(
     end="2028-12-01",
     frequency="year"
   )
-)}
+)
+}
 }

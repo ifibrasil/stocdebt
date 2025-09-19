@@ -162,14 +162,12 @@ x <- charts(
   fan_chart_percentiles = c(0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9)
 )
 
-## Step 4.1) visualize some PATHS of stochastic scenarios
 \dontrun{
+## Step 4.1) visualize some PATHS of stochastic scenarios
 x$list_of_charts$paths$ggplot[["debt"]]
 x$list_of_charts$paths$ggplot[["primary balance"]]
-}
 
 ## Step 4.2) visualize FAN CHARTS of stochastic scenarios
-\dontrun{
 x$list_of_charts$fancharts$ggplot[["debt"]]
 x$list_of_charts$fancharts$ggplot[["primary balance"]]
 }
