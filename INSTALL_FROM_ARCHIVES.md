@@ -53,5 +53,5 @@ Depois de baixar `stocdebt_linux.tar.gz`, execute os comandos abaixo, substituin
 install.packages(c("MASS", "readr", "withr", "zoo", "dplyr", "dygraphs", "ggplot2", "openxlsx", "rlang", "tidyr", "scales", "reticulate", "xts"))
 
 # Instalar pacote "stocdebt"
-install.packages(pkgs = "C:\...\...\stocdebt_linux.tar.gz", repos = NULL)
+install.packages(pkgs = "/.../.../stocdebt_linux.tar.gz", repos = NULL)
 ```
