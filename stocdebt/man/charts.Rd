@@ -12,6 +12,7 @@ charts(
   seed_if_limited_export = 1,
   fan_color = "#005d89",
   max_to_plot = 100,
+  y_axis = list(),
   add_horizontal_line = list()
 )
 }
@@ -27,6 +28,8 @@ charts(
 \item{fan_color}{\code{character(1)}. RGB code of the color of the fan chart. Default is dark blue (\code{"#005d89"}).}
 
 \item{max_to_plot}{\code{integer(1)}. Maximum number of stochastic scenarios to plot in \emph{paths} charts (\emph{fan} charts are not affected). The more scenarios plotted, the longer it will take to load the charts. Default is 100.}
+
+\item{y_axis}{\code{list(n)}. List with maxima and minima for the y-axis in the charts. For example, \code{list("debt" = c(0,100), "real gdp growth" = c(-5,5))} will set the range of the y-axis to be [0,100] in the chart for debt, and [-5,5] in the chart for real GDP growth. Variable names must be those used when generating argument \code{object} by means of functions \code{\link{sim}} (if \code{type="simulation"}) or \code{\link{shocks_generator}} (if \code{type ="shocks"}).}
 
 \item{add_horizontal_line}{\code{list(n)}. List with the y-axis value of a horizontal line. For example, \code{list("primary balance" = 0, "real gdp growth" = 1)}. Variable names must be those used when generating argument \code{object} by means of functions \code{\link{sim}} (if \code{type="simulation"}) or \code{\link{shocks_generator}} (if \code{type ="shocks"}). Default is not to add a line.}
 }
