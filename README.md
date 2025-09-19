@@ -22,7 +22,7 @@ install.packages("remotes")
 remotes::install_github("ifibrasil/stocdebt/stocdebt@<VERSION>", build_vignettes = TRUE, upgrade = "never")
 ```
 
-The `<VERSION>` placeholder must be replaced with one of the **stable** version numbers of the package. For example, `"ifibrasil/stocdebt/stocdebt@1.0.0"`. These numbers are on the "Release" list of this repository (right panel of this website). In case `@<VERSION>` is omitted from the command, a **development** version (subject to errors) of the package will possibly be installed.
+The `<VERSION>` placeholder must be replaced with one of the **stable** version numbers of the package. For example, `"ifibrasil/stocdebt/stocdebt@1.0.0"`. These numbers are on the "Releases" list of this repository (right panel of this website). In case `@<VERSION>` is omitted from the command, a **development** version (subject to errors) of the package will possibly be installed.
 
 By the time this text is written, the latest stable version is `1.0.0`, but this number will change over time.
 
