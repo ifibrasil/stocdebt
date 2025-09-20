@@ -167,7 +167,7 @@ export_to_excel(
   filename = "simulation_results.xlsx",
   draw_charts = c("debt","primary balance"),
   date_format = "yyyy",
-  y_axis = base::list(debt = c(50,100))
+  y_axis = list(debt = c(50,100))
 )
 }
 
