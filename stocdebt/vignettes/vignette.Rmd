@@ -203,7 +203,7 @@ shocks <- shocks_generator(
   p = "primary balance"
 )
 ```
-By setting `subintervals = "2009-12-01/2019-12-01"`, we use only historical values before the Covid-19 pandemic (2020), avoiding observations subject to extreme changes.
+By setting `subintervals = "2009-12-01/2019-12-01"`, we use only historical values before the Covid-19 pandemic (2020), avoiding observations subject to extreme changes.^[When \code{case = "ec"}, dates in argument \code{subintervals} are those of the **first differences** of debt determinants, not of their **levels**. So, for example, if you are dealing with quarterly data and have chosen two nonadjacent \code{subintervals = c("2011-03-01/2014-12-01","2017-03-01/2019-03-01")}, then shocks will include the difference between values at period \code{"2017-03-01"} and one period behind, \code{"2016-12-01"}, even though the latter is not explicitly in \code{subintervals}.]
 
 The command above outputs a list with four elements:
 

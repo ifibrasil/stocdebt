@@ -71,7 +71,12 @@ Examples with \bold{two nonadjacent} subintervals:
 
 Case \code{"normal"} draws random observations from normal probability distributions, with mean zero and standard deviations set by the user, for the debt determinants (nominal interest, inflation rate, real GDP growth and primary balance). The normal distributions associated to the determinants are independent from each other.
 
-Case \code{"ec"} implements the randomization as in European Commission (2013), which amounts to drawing random observations from a multivariate normal probability distribution. This distribution has mean zero and variance-covariance matrix equal to the observed variance-covariance of the \dQuote{historical shocks} (first differences of debt determinants).
+Case \code{"ec"} implements the randomization as in European Commission (2013), which amounts to drawing random observations from a multivariate normal probability distribution. This distribution has mean zero and variance-covariance matrix equal to the observed variance-covariance of the \dQuote{historical shocks} (first differences of debt determinants). When \code{case = "ec"}, argument \code{subintervals} causes the shocks to be computed in two steps:
+\enumerate{
+\item compute first differences of \code{realized_data}.
+\item select periods informed in \code{subintervals}.
+}
+Thus, when \code{case = "ec"}, dates in argument \code{subintervals} are those of the \bold{first differences} of debt determinants, not of their \bold{levels}. So, for example, if you are dealing with quarterly data and have chosen two nonadjacent \code{subintervals = c("2011-03-01/2014-12-01","2017-03-01/2019-03-01")}, then shocks will include the difference between values at period \code{"2017-03-01"} and one period behind, \code{"2016-12-01"}, even though the latter is not explicitly in \code{subintervals}.
 
 Argument \code{shocks_seed} is set to 1 by default. It makes the randomization lead to the same results across consecutive calls of function \code{shocks_generator}, thus enabling the user to reproduce the analysis. To obtain different results, the user must change the value of \code{shocks_seed} across calls.
 
