@@ -94,8 +94,7 @@ export_to_excel(
 
 The function extracts objects from argument \code{object} and creates a variety of worksheets in an xlsx file. These sheets will be filled with tables. To draw charts based on such tables, the user must have Python installed in the computer, because R will call Python in the background.
 
-Specifically when \code{type = "simulation"}, if there are too many stochastic scenarios to export to the xlsx file, only a subset of them (\code{max_to_plot}) are indeed written into that file. This limitation has been set to prevent the xlsx file from becoming excessively large and difficult to handle. However, the fan charts are not affected by \code{max_to_plot}, because their percentiles are computed from all stochastic scenarios, without exception. The total number of stochastic scenarios used to compute the percentiles is that informed in argument \code{n_stochastic_scenarios} of function \code{\link{sim}}.
-
+When \code{type = "simulation"}, if there are too many stochastic scenarios to export to the xlsx file, only a subset of them (\code{max_to_plot}) are indeed written into that file. This limitation has been set to prevent the xlsx file from becoming excessively large and difficult to handle. However, the fan charts are not affected by \code{max_to_plot}, because their percentiles are computed from all stochastic scenarios, without exception. The total number of stochastic scenarios used to compute the percentiles is that informed in argument \code{n_stochastic_scenarios} of function \code{\link{sim}}.
 }
 \examples{
 ## Exporting CORRELOGRAMS (this is independent of any simulation)
