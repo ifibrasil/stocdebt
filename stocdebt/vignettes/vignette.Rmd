@@ -52,7 +52,7 @@ Argument `build_vignettes = TRUE` is optional. If you do not use it, the package
 Argument `upgrade = "never"` also is optional, but simplifies the installation process.
 
 Next, load the package.
-```{r load, eval=FALSE}
+```{r load, eval=TRUE, results='hide'}
 library(stocdebt)
 ```
 
