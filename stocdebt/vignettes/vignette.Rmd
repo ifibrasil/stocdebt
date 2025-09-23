@@ -26,9 +26,7 @@ Suggestions and bug reports can be submitted to ifi&#64;senado&#46;leg&#46;br or
 
 # 1) Setup
 
-To install the package from the online repository, run (if you cannot install directly from GitHub, see [Installing from downloaded archives](#installing-from-downloaded-archives)).
-
-)download the compressed archives in the release assets (`stocdebt_windows.zip` for Windows and `stocdebt_linux.tar.gz` for Linux), and follow the [instructions to install from them](INSTALL_FROM_ARCHIVES.md).
+To install the package from the online repository, run (if you cannot install directly from GitHub, see the appendix [Installing from downloaded archives](#installing-from-downloaded-archives)).
 ```{r install, eval=FALSE}
 # Install auxiliary package "remotes"
 install.packages("remotes")       
@@ -437,7 +435,25 @@ A practical advantage of inputting `tic` and `r_tic` in function `sim` is the po
 
 ## Initial check for python {#initial-check-for-python}
 
+To generate fan charts in the xlsx file by means of `export_to_excel`, it is necessary that
+
+* there is a Python installation on the computer;
+* the following Python modules are installed: `pandas`, `numpy`, `xlsxwriter` and `openpyxl`.
+
+If there is no Python or any of the modules installed, `stocdebt` will warn the user. Even so, it is worth pointing out the following information.
+
 When the package loads after the user issues `library(stocdebt)`, the package looks for a Python installation in the computer (by means of its internal `.onLoad()` function, not visible to the user). However, Python is necessary only to export charts to xlsx files. Thus, even if there is no Python installation, all other features will work appropriately.
+
+The relevant Python functions are triggered from within R, so that there is no need for the user to interact directly with Python. This is true provided that Python is on the system PATH. Usually, when installing Python, it will automatically be added to the PATH. If it is not added, package `stocdebt` will issue a warning. In this case, the user might have to add Python to the system's PATH manually.
+
+Another occasion possibly requiring manual intervention in the PATH is conflict among Python versions. If there is more than one Python version installed on the computer (say, 3.10 and 3.13), the user must be sure that the version detected by R is the one he/she intends to use. R package `reticulate` can be used to find out the version detected by R:
+```{r, eval=FALSE}
+reticulate::py_discover_config()
+```
+It is also possible to appoint the desired Python version to R:
+```{r, eval=FALSE}
+reticulate::use_python("path/to/python")
+```
 
 ## Understanding the source code
 
@@ -464,28 +480,28 @@ There will always be room for improvement in efficiency, that is, faster simulat
 
 ## Appendix: installing from downloaded archives {#installing-from-downloaded-archives}
 
-If you cannot install directly from GitHub, download the compressed archives on GitHub [release assets](https://github.com/ifibrasil/stocdebt/releases) (`stocdebt_windows.zip` for Windows and `stocdebt_linux.tar.gz` for Linux).
+If you cannot install directly from GitHub, download the compressed archives on GitHub [release assets](https://github.com/ifibrasil/stocdebt/releases) (`stocdebt_<VERSION>.zip` for Windows and `stocdebt_<VERSION>.tar.gz` for Linux). For example, `stocdebt_1.0.0.zip` and `stocdebt_1.0.0.tar.gz`.
 
-### On Windows (archive `stocdebt_windows.zip`)
+### On Windows (archive `stocdebt_<VERSION>.zip`)
 
-After downloading `stocdebt_windows.zip`, run the following commands, replacing argument `pkgs` with the path to `stocdebt_windows.zip` on your computer.
+After downloading `stocdebt_<VERSION>.zip`, run the following commands, replacing argument `pkgs` with the path to `stocdebt_<VERSION>.zip` on your computer.
 
 ```{r, eval=FALSE}
 # Install dependencies (other packages on which "stocdebt" depends to work appropriately)
 install.packages(c("MASS", "readr", "withr", "zoo", "dplyr", "dygraphs", "ggplot2", "openxlsx", "rlang", "tidyr", "scales", "reticulate", "xts"))
 
 # Install package "stocdebt"
-install.packages(pkgs = "C:\...\...\stocdebt_windows.zip", repos = NULL)
+install.packages(pkgs = "C:\...\...\stocdebt_<VERSION>.zip", repos = NULL)
 ```
 
-## On Linux (archive `stocdebt_linux.tar.gz`)
+### On Linux (archive `stocdebt_<VERSION>.tar.gz`)
 
-After downloading `stocdebt_linux.tar.gz`, run the following commands, replacing argument `pkgs` with the path to `stocdebt_linux.tar.gz` on your computer.
+After downloading `stocdebt_<VERSION>.tar.gz`, run the following commands, replacing argument `pkgs` with the path to `stocdebt_<VERSION>.tar.gz` on your computer.
 
 ```{r, eval=FALSE}
 # Install dependencies (other packages on which "stocdebt" depends to work appropriately)
 install.packages(c("MASS", "readr", "withr", "zoo", "dplyr", "dygraphs", "ggplot2", "openxlsx", "rlang", "tidyr", "scales", "reticulate", "xts"))
 
 # Install package "stocdebt"
-install.packages(pkgs = "/.../.../stocdebt_linux.tar.gz", repos = NULL)
+install.packages(pkgs = "/.../.../stocdebt_<VERSION>.tar.gz", repos = NULL)
 ```

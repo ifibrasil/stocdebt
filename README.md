@@ -40,7 +40,7 @@ Argument `upgrade = "never"` is also optional, but it simplifies the installatio
 
 ### Installing from downloaded `.tar.gz` and `.zip` files
 
-If you cannot install directly from GitHub, download the compressed archives available in the [release assets](https://github.com/ifibrasil/stocdebt/releases) (`stocdebt_windows.zip` for Windows and `stocdebt_linux.tar.gz` for Linux), and follow the [instructions to install from them](INSTALL_FROM_ARCHIVES.md).
+If you cannot install directly from GitHub, download the compressed archives available in the [release assets](https://github.com/ifibrasil/stocdebt/releases) (`stocdebt_<VERSION>.zip` for Windows and `stocdebt_<VERSION>.tar.gz` for Linux). For example, `stocdebt_1.0.0.zip` and `stocdebt_1.0.0.tar.gz`. Then, follow the [instructions to install from them](INSTALL_FROM_ARCHIVES.md).
 
 ## Methodology
 
@@ -110,7 +110,7 @@ O argumento `upgrade = "never"` também é opcional, mas simplifica o processo d
 
 ### Instalação a partir dos arquivos `.tar.gz` e `.zip` baixados
 
-Se não for possível instalar diretamente do GitHub, baixe os arquivos anexos à [versão publicada](https://github.com/ifibrasil/stocdebt/releases). Os arquivos são `stocdebt_windows.zip` (para Windows) e `stocdebt_linux.tar.gz` (para Linux). Depois, siga as [instruções para instalação via arquivos](INSTALL_FROM_ARCHIVES.md).
+Se não for possível instalar diretamente do GitHub, baixe os arquivos anexos à [versão de interesse](https://github.com/ifibrasil/stocdebt/releases). Os arquivos são `stocdebt_<VERSÃO>.zip` (para Windows) e `stocdebt_<VERSÃO>.tar.gz` (para Linux). Por exemplo, `stocdebt_1.0.0.zip` e `stocdebt_1.0.0.tar.gz`. Depois, siga as [instruções para instalação via arquivos](INSTALL_FROM_ARCHIVES.md).
 
 ## Metodologia
 
