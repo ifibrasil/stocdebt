@@ -288,7 +288,7 @@ charts <- function(
 						table_for_plotting %>%
 						ggplot2::ggplot(ggplot2::aes(x = .data$Period, y = !!rlang::sym(v))) +
 						ggplot2::geom_line(data=dplyr::filter(table_for_plotting,.data$Percentile == "Baseline scenario"),color=fan_color,linewidth=1.5) +
-						ggplot2::geom_ribbon(data=dplyr::filter(table_for_plotting,.data$Percentile != "Baseline scenario"),mapping=ggplot2::aes(ymin=.data$ymin,ymax=.data$ymax,fill=.data$Percentile)) +
+						ggplot2::geom_ribbon(data=stats::na.omit(dplyr::filter(table_for_plotting,.data$Percentile != "Baseline scenario")),mapping=ggplot2::aes(ymin=.data$ymin,ymax=.data$ymax,fill=.data$Percentile)) +
 						ggplot2::scale_fill_manual(values=the_colors) +
 						ggplot2::labs(title = v, y = NULL, x = NULL) +
 						ggplot2::theme(
