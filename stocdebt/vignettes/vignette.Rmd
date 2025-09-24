@@ -201,7 +201,7 @@ shocks <- shocks_generator(
   p = "primary balance"
 )
 ```
-By setting `subintervals = "2009-12-01/2019-12-01"`, we use only historical values before the Covid-19 pandemic (2020), avoiding observations subject to extreme changes.^[When \code{case = "ec"}, dates in argument \code{subintervals} are those of the **first differences** of debt determinants, not of their **levels**. So, for example, if you are dealing with quarterly data and have chosen two nonadjacent \code{subintervals = c("2011-03-01/2014-12-01","2017-03-01/2019-03-01")}, then shocks will include the difference between values at period \code{"2017-03-01"} and one period behind, \code{"2016-12-01"}, even though the latter is not explicitly in \code{subintervals}.]
+By setting `subintervals = "2009-12-01/2019-12-01"`, we use only historical values before the Covid-19 pandemic (2020), avoiding observations subject to extreme changes.^[When `case = "ec"`, dates in argument `subintervals` are those of the **first differences** of debt determinants, not of their **levels**. So, for example, if you are dealing with quarterly data and have chosen two nonadjacent `subintervals = c("2011-03-01/2014-12-01","2017-03-01/2019-03-01")`, then shocks will include the difference between values at period `"2017-03-01"` and one period behind, `"2016-12-01"`, even though the latter is not explicitly in `subintervals`.]
 
 The command above outputs a list with four elements:
 
@@ -478,11 +478,11 @@ The code has been developed without creating new classes and methods of R. The a
 
 There will always be room for improvement in efficiency, that is, faster simulations. To those developers willing to propose more efficient code, we suggest that they ensure the new version is not difficult to understand for a broad audience. For example, some loops could be replaced with vector operations, but such replacement may make the role of the code chunk less evident in the overall computations executed by a function.
 
-## Appendix: installing from downloaded archives {#installing-from-downloaded-archives}
+# Appendix: installing from downloaded archives {#installing-from-downloaded-archives}
 
 If you cannot install directly from GitHub, download the compressed archives on GitHub [release assets](https://github.com/ifibrasil/stocdebt/releases) (`stocdebt_<VERSION>.zip` for Windows and `stocdebt_<VERSION>.tar.gz` for Linux). For example, `stocdebt_1.0.0.zip` and `stocdebt_1.0.0.tar.gz`.
 
-### On Windows (archive `stocdebt_<VERSION>.zip`)
+## On Windows (archive `stocdebt_<VERSION>.zip`)
 
 After downloading `stocdebt_<VERSION>.zip`, run the following commands, replacing argument `pkgs` with the path to `stocdebt_<VERSION>.zip` on your computer.
 
@@ -494,7 +494,7 @@ install.packages(c("MASS", "readr", "withr", "zoo", "dplyr", "dygraphs", "ggplot
 install.packages(pkgs = "C:\...\...\stocdebt_<VERSION>.zip", repos = NULL)
 ```
 
-### On Linux (archive `stocdebt_<VERSION>.tar.gz`)
+## On Linux (archive `stocdebt_<VERSION>.tar.gz`)
 
 After downloading `stocdebt_<VERSION>.tar.gz`, run the following commands, replacing argument `pkgs` with the path to `stocdebt_<VERSION>.tar.gz` on your computer.
 
