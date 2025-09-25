@@ -1,6 +1,6 @@
 ---
 title: 'User guide'
-date: '2025-09-19'
+date: '2025-09-26'
 output:
   html_document:
     toc: true
@@ -35,9 +35,9 @@ install.packages("remotes")
 remotes::install_github("ifibrasil/stocdebt/stocdebt@<VERSION>", build_vignettes = TRUE, upgrade = "never")
 ```
 
-The `<VERSION>` placeholder must be replaced with one of the **stable** version numbers of the package. For example, `"ifibrasil/stocdebt/stocdebt@1.0.0"`. These numbers are on the "Release" list of the online repository (right panel of the website). In case `@<VERSION>` is omitted from the command, a **development** version (subject to errors) of the package will possibly be installed.
+The `<VERSION>` placeholder must be replaced with one of the **stable** version numbers of the package. For example, `"ifibrasil/stocdebt/stocdebt@1.1.2"`. These numbers are on the "Release" list of the online repository (right panel of the website). In case `@<VERSION>` is omitted from the command, a **development** version (subject to errors) of the package will possibly be installed.
 
-By the time this text is written, the latest stable version is `1.0.0`, but this number will change over time.
+By the time this text is written, the latest stable version is `1.1.2`, but this number will change over time.
 
 If you have already installed the package and want to verify the version, run
 
@@ -45,7 +45,7 @@ If you have already installed the package and want to verify the version, run
 utils::packageDescription("stocdebt")$RemoteRef
 ```
 
-If the output is `"<VERSION>"` (currently, `"1.0.0"`), your installation is correct. It is the latest stable version. If the output is `"HEAD"`, you installed the development version.
+If the output is `"<VERSION>"` (currently, `"1.1.2"`), your installation is correct. It is the latest stable version. If the output is `"HEAD"`, you installed the development version.
 
 Argument `build_vignettes = TRUE` is optional. If you do not use it, the package will be installed, but without an additional "User guide". Only standard documentation (help files) will be available.
 
@@ -480,7 +480,7 @@ There will always be room for improvement in efficiency, that is, faster simulat
 
 # Appendix: installing from downloaded archives {#installing-from-downloaded-archives}
 
-If you cannot install directly from GitHub, download the compressed archives on GitHub [release assets](https://github.com/ifibrasil/stocdebt/releases) (`stocdebt_<VERSION>.zip` for Windows and `stocdebt_<VERSION>.tar.gz` for Linux). For example, `stocdebt_1.0.0.zip` and `stocdebt_1.0.0.tar.gz`.
+If you cannot install directly from GitHub, download the compressed archives on GitHub [release assets](https://github.com/ifibrasil/stocdebt/releases) (`stocdebt_<VERSION>.zip` for Windows and `stocdebt_<VERSION>.tar.gz` for Linux). For example, `stocdebt_1.1.2.zip` and `stocdebt_1.1.2.tar.gz`.
 
 ## On Windows (archive `stocdebt_<VERSION>.zip`)
 
