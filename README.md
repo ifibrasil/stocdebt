@@ -44,7 +44,7 @@ If you cannot install directly from GitHub, download the compressed archives ava
 
 ## Methodology
 
-The package has been used in some editions of the institution's [Fiscal Follow-Up Report](https://www12.senado.leg.br/ifi/publicacoes-ifi?tipo=relatorio), a monthly report on the fiscal stance of the Brazilian government. For more methodological details about the simulations (in portuguese), please read [Special Study n. 18](https://www2.senado.leg.br/bdsf/bitstream/handle/id/645203/EE18.pdf) (2023), [Technical Note n. 54](https://www2.senado.leg.br/bdsf/bitstream/handle/id/651183/NT54_Sensibilidade_cenarios_estocasticos_divida.pdf) (2024) and [Technical Note n. 60](LINK HERE). The latter is simply a Portuguese version of the package's vignette.
+The package has been used in some editions of the institution's [Fiscal Follow-Up Report](https://www12.senado.leg.br/ifi/publicacoes-ifi?tipo=relatorio), a monthly report on the fiscal stance of the Brazilian government. For more methodological details about the simulations (in portuguese), please read [Special Study n. 18](https://www2.senado.leg.br/bdsf/bitstream/handle/id/645203/EE18.pdf) (2023), [Technical Note n. 54](https://www2.senado.leg.br/bdsf/bitstream/handle/id/651183/NT54_Sensibilidade_cenarios_estocasticos_divida.pdf) (2024) and [Technical Note n. 59](https://www12.senado.leg.br/ifi/publicacoes-1/pasta-notas-tecnicas/2025/setembro/nota-tecnica-no-59-pacote-r-cenarios-estocasticos-da-divida-publica-set-25). The latter is simply a Portuguese version of the package's vignette.
 
 ## Standard R documentation in PDF
 
@@ -114,7 +114,7 @@ Se não for possível instalar diretamente do GitHub, baixe os arquivos anexos �
 
 ## Metodologia
 
-O pacote foi usado para elaborar algumas edições do [Relatório de Acompanhamento Fiscal](https://www12.senado.leg.br/ifi/publicacoes-ifi?tipo=relatorio) da instituição, um documento mensal sobre a situação fiscal do governo brasileiro.Para mais detalhes metodológicos sobre as simulações, veja o [Estudo Especial n. 18](https://www2.senado.leg.br/bdsf/bitstream/handle/id/645203/EE18.pdf) (2023), a [Nota Técnica n. 54](https://www2.senado.leg.br/bdsf/bitstream/handle/id/651183/NT54_Sensibilidade_cenarios_estocasticos_divida.pdf) (2024) e a [Nota Técnica n. 60](LINK HERE). Esta última é simplesmente a versão em português da *vignette* que acompanha o pacote.
+O pacote foi usado para elaborar algumas edições do [Relatório de Acompanhamento Fiscal](https://www12.senado.leg.br/ifi/publicacoes-ifi?tipo=relatorio) da instituição, um documento mensal sobre a situação fiscal do governo brasileiro.Para mais detalhes metodológicos sobre as simulações, veja o [Estudo Especial n. 18](https://www2.senado.leg.br/bdsf/bitstream/handle/id/645203/EE18.pdf) (2023), a [Nota Técnica n. 54](https://www2.senado.leg.br/bdsf/bitstream/handle/id/651183/NT54_Sensibilidade_cenarios_estocasticos_divida.pdf) (2024) e a [Nota Técnica n. 59](https://www12.senado.leg.br/ifi/publicacoes-1/pasta-notas-tecnicas/2025/setembro/nota-tecnica-no-59-pacote-r-cenarios-estocasticos-da-divida-publica-set-25). Esta última é simplesmente a versão em português da *vignette* que acompanha o pacote.
 
 ## Documentação em PDF no padrão R
 
