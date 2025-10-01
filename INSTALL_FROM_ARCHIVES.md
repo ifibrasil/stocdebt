@@ -12,7 +12,7 @@ install.packages(c("MASS", "readr", "withr", "zoo", "dplyr", "dygraphs", "ggplot
 install.packages(pkgs = "C:\...\...\stocdebt_<VERSION>.zip", repos = NULL)
 ```
 
-## Linux (archive `stocdebt_linux.tar.gz`)
+## Linux (archive `stocdebt_<VERSION>.tar.gz`)
 
 After downloading `stocdebt_<VERSION>.tar.gz`, run the following commands, replacing argument `pkgs` with the path to `stocdebt_<VERSION>.tar.gz` on your computer.
 
